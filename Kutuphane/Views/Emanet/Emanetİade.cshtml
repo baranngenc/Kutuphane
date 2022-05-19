@@ -1,0 +1,50 @@
+﻿@model Kutuphane.Models.Entity.Emanet
+@{
+    ViewBag.Title = "Emanetİade";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2 style="color:1abc9c;">Emanet İade</h2>
+@using (Html.BeginForm("Emanetİade", "Emanet", FormMethod.Post))
+{
+    <div style="margin-top:15px"></div>
+    <div>
+        <label>Hareket  Id</label>
+        @Html.TextBoxFor(p => p.Id, new { @class = "form-control" })
+    </div>
+    <div>
+        <label>Kitap Id</label>
+        @Html.TextBoxFor(p => p.Kitap.Id, new { @class = "form-control" })
+    </div>
+    <div>
+        <label>Üye Id</label>
+        @Html.TextBoxFor(p => p.Uye.Id, new { @class = "form-control" })
+    </div>
+    <div>
+        <label>Personel Id</label>
+        @Html.TextBoxFor(p => p.Personel.Id, new { @class = "form-control" })
+    </div>
+    <div>
+        <label>Alış Tarihi</label>
+        @Html.TextBoxFor(p => p.AlisTarihi, "{0: dd/MM/yyyy}", new { @class = "form-control" })
+    </div>
+    <div>
+        <label>İade Tarihi</label>
+        @Html.TextBoxFor(p => p.IadeTarihi, "{0: dd/MM/yyyy}", new { @class = "form-control" })
+    </div>
+    <div>
+        <label>Teslim Tarihi</label>
+        <input type="text" class="form-control" name="TeslimTarihi" value="@DateTime.Now.ToShortDateString()" />
+    </div>
+    <div>
+        <label>Ceza </label>
+        <input type="text" class="form-control" id="CezaGunu" value="@ViewBag.Ceza" />
+    </div>
+    <div></div>
+    <div style="margin-top:15px;">
+        <button class="btn btn-primary" style="background-color:1abc9c; border:0;color:ffffff;">Kitabı Teslim Al</button>
+    </div>
+
+
+}
+

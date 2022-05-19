@@ -1,0 +1,622 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="KutuphaneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Ceza">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Uye" Type="int" Nullable="false" />
+          <Property Name="Emanet" Type="int" Nullable="false" />
+          <Property Name="BaslamaTarihi" Type="datetime" Nullable="false" />
+          <Property Name="BitisTarihi" Type="datetime" Nullable="false" />
+          <Property Name="CezaUcreti" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Emanet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KitapId" Type="int" Nullable="false" />
+          <Property Name="UyeId" Type="int" Nullable="false" />
+          <Property Name="PersonelId" Type="int" Nullable="false" />
+          <Property Name="AlisTarihi" Type="datetime" Nullable="false" />
+          <Property Name="IadeTarihi" Type="datetime" Nullable="false" />
+          <Property Name="IslemDurum" Type="bit" />
+          <Property Name="TeslimTarihi" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Iletisim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdSoyad" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Telefon" Type="nvarchar(max)" />
+          <Property Name="MesajKonusu" Type="nvarchar(max)" />
+          <Property Name="Mesaj" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Kasa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AyAdi" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Tutar" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Adi" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kitap">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Adi" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="KategoriId" Type="int" Nullable="false" />
+          <Property Name="YazarId" Type="int" Nullable="false" />
+          <Property Name="BasimYili" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="Yayinevi" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SayfaSayisi" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Durum" Type="bit" Nullable="false" />
+          <Property Name="Fotograf" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Personel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Adi" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Soyadi" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Uye">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Adi" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Soyadi" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EMail" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="KullaniciAdi" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Sifre" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Fotograf" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Telefon" Type="nvarchar" MaxLength="11" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Yazar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Adi" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Soyadi" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Ceza_Emanet">
+          <End Role="Emanet" Type="Self.Emanet" Multiplicity="1" />
+          <End Role="Ceza" Type="Self.Ceza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Emanet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ceza">
+              <PropertyRef Name="Emanet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ceza_Uye">
+          <End Role="Uye" Type="Self.Uye" Multiplicity="1" />
+          <End Role="Ceza" Type="Self.Ceza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uye">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ceza">
+              <PropertyRef Name="Uye" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emanet_Kitap">
+          <End Role="Kitap" Type="Self.Kitap" Multiplicity="1" />
+          <End Role="Emanet" Type="Self.Emanet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kitap">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Emanet">
+              <PropertyRef Name="KitapId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emanet_Personel">
+          <End Role="Personel" Type="Self.Personel" Multiplicity="1" />
+          <End Role="Emanet" Type="Self.Emanet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Emanet">
+              <PropertyRef Name="PersonelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emanet_Uye">
+          <End Role="Uye" Type="Self.Uye" Multiplicity="1" />
+          <End Role="Emanet" Type="Self.Emanet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uye">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Emanet">
+              <PropertyRef Name="UyeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kitap_Kategori">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="1" />
+          <End Role="Kitap" Type="Self.Kitap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Kitap">
+              <PropertyRef Name="KategoriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kitap_Yazar">
+          <End Role="Yazar" Type="Self.Yazar" Multiplicity="1" />
+          <End Role="Kitap" Type="Self.Kitap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Yazar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Kitap">
+              <PropertyRef Name="YazarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KutuphaneModelStoreContainer">
+          <EntitySet Name="Ceza" EntityType="Self.Ceza" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Emanet" EntityType="Self.Emanet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Iletisim" EntityType="Self.Iletisim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kasa" EntityType="Self.Kasa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kitap" EntityType="Self.Kitap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personel" EntityType="Self.Personel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Uye" EntityType="Self.Uye" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Yazar" EntityType="Self.Yazar" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Ceza_Emanet" Association="Self.FK_Ceza_Emanet">
+            <End Role="Emanet" EntitySet="Emanet" />
+            <End Role="Ceza" EntitySet="Ceza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ceza_Uye" Association="Self.FK_Ceza_Uye">
+            <End Role="Uye" EntitySet="Uye" />
+            <End Role="Ceza" EntitySet="Ceza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emanet_Kitap" Association="Self.FK_Emanet_Kitap">
+            <End Role="Kitap" EntitySet="Kitap" />
+            <End Role="Emanet" EntitySet="Emanet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emanet_Personel" Association="Self.FK_Emanet_Personel">
+            <End Role="Personel" EntitySet="Personel" />
+            <End Role="Emanet" EntitySet="Emanet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emanet_Uye" Association="Self.FK_Emanet_Uye">
+            <End Role="Uye" EntitySet="Uye" />
+            <End Role="Emanet" EntitySet="Emanet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kitap_Kategori" Association="Self.FK_Kitap_Kategori">
+            <End Role="Kategori" EntitySet="Kategori" />
+            <End Role="Kitap" EntitySet="Kitap" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kitap_Yazar" Association="Self.FK_Kitap_Yazar">
+            <End Role="Yazar" EntitySet="Yazar" />
+            <End Role="Kitap" EntitySet="Kitap" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KutuphaneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Ceza">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Uye" Type="Int32" Nullable="false" />
+          <Property Name="Emanet" Type="Int32" Nullable="false" />
+          <Property Name="BaslamaTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BitisTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CezaUcreti" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Emanet1" Relationship="Self.FK_Ceza_Emanet" FromRole="Ceza" ToRole="Emanet" />
+          <NavigationProperty Name="Uye1" Relationship="Self.FK_Ceza_Uye" FromRole="Ceza" ToRole="Uye" />
+        </EntityType>
+        <EntityType Name="Emanet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KitapId" Type="Int32" Nullable="false" />
+          <Property Name="UyeId" Type="Int32" Nullable="false" />
+          <Property Name="PersonelId" Type="Int32" Nullable="false" />
+          <Property Name="AlisTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IadeTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Ceza" Relationship="Self.FK_Ceza_Emanet" FromRole="Emanet" ToRole="Ceza" />
+          <NavigationProperty Name="Kitap" Relationship="Self.FK_Emanet_Kitap" FromRole="Emanet" ToRole="Kitap" />
+          <NavigationProperty Name="Personel" Relationship="Self.FK_Emanet_Personel" FromRole="Emanet" ToRole="Personel" />
+          <NavigationProperty Name="Uye" Relationship="Self.FK_Emanet_Uye" FromRole="Emanet" ToRole="Uye" />
+          <Property Name="IslemDurum" Type="Boolean" />
+          <Property Name="TeslimTarihi" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Kasa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AyAdi" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Tutar" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Adi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Kitap" Relationship="Self.FK_Kitap_Kategori" FromRole="Kategori" ToRole="Kitap" />
+        </EntityType>
+        <EntityType Name="Kitap">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Adi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KategoriId" Type="Int32" Nullable="false" />
+          <Property Name="YazarId" Type="Int32" Nullable="false" />
+          <Property Name="BasimYili" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Yayinevi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SayfaSayisi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Durum" Type="Boolean" Nullable="false" DefaultValue="true" />
+          <NavigationProperty Name="Emanet" Relationship="Self.FK_Emanet_Kitap" FromRole="Kitap" ToRole="Emanet" />
+          <NavigationProperty Name="Kategori" Relationship="Self.FK_Kitap_Kategori" FromRole="Kitap" ToRole="Kategori" />
+          <NavigationProperty Name="Yazar" Relationship="Self.FK_Kitap_Yazar" FromRole="Kitap" ToRole="Yazar" />
+          <Property Name="Fotograf" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Personel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Adi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Soyadi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Emanet" Relationship="Self.FK_Emanet_Personel" FromRole="Personel" ToRole="Emanet" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Uye">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Adi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Soyadi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EMail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KullaniciAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sifre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fotograf" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telefon" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Ceza" Relationship="Self.FK_Ceza_Uye" FromRole="Uye" ToRole="Ceza" />
+          <NavigationProperty Name="Emanet" Relationship="Self.FK_Emanet_Uye" FromRole="Uye" ToRole="Emanet" />
+        </EntityType>
+        <EntityType Name="Yazar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Adi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Soyadi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Kitap" Relationship="Self.FK_Kitap_Yazar" FromRole="Yazar" ToRole="Kitap" />
+        </EntityType>
+        <Association Name="FK_Ceza_Emanet">
+          <End Role="Emanet" Type="Self.Emanet" Multiplicity="1" />
+          <End Role="Ceza" Type="Self.Ceza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Emanet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ceza">
+              <PropertyRef Name="Emanet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ceza_Uye">
+          <End Role="Uye" Type="Self.Uye" Multiplicity="1" />
+          <End Role="Ceza" Type="Self.Ceza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uye">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ceza">
+              <PropertyRef Name="Uye" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emanet_Kitap">
+          <End Role="Kitap" Type="Self.Kitap" Multiplicity="1" />
+          <End Role="Emanet" Type="Self.Emanet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kitap">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Emanet">
+              <PropertyRef Name="KitapId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emanet_Personel">
+          <End Role="Personel" Type="Self.Personel" Multiplicity="1" />
+          <End Role="Emanet" Type="Self.Emanet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Emanet">
+              <PropertyRef Name="PersonelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emanet_Uye">
+          <End Role="Uye" Type="Self.Uye" Multiplicity="1" />
+          <End Role="Emanet" Type="Self.Emanet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uye">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Emanet">
+              <PropertyRef Name="UyeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kitap_Kategori">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="1" />
+          <End Role="Kitap" Type="Self.Kitap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Kitap">
+              <PropertyRef Name="KategoriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kitap_Yazar">
+          <End Role="Yazar" Type="Self.Yazar" Multiplicity="1" />
+          <End Role="Kitap" Type="Self.Kitap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Yazar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Kitap">
+              <PropertyRef Name="YazarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KutuphaneEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Ceza" EntityType="Self.Ceza" />
+          <EntitySet Name="Emanet" EntityType="Self.Emanet" />
+          <EntitySet Name="Kasa" EntityType="Self.Kasa" />
+          <EntitySet Name="Kategori" EntityType="Self.Kategori" />
+          <EntitySet Name="Kitap" EntityType="Self.Kitap" />
+          <EntitySet Name="Personel" EntityType="Self.Personel" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Uye" EntityType="Self.Uye" />
+          <EntitySet Name="Yazar" EntityType="Self.Yazar" />
+          <AssociationSet Name="FK_Ceza_Emanet" Association="Self.FK_Ceza_Emanet">
+            <End Role="Emanet" EntitySet="Emanet" />
+            <End Role="Ceza" EntitySet="Ceza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ceza_Uye" Association="Self.FK_Ceza_Uye">
+            <End Role="Uye" EntitySet="Uye" />
+            <End Role="Ceza" EntitySet="Ceza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emanet_Kitap" Association="Self.FK_Emanet_Kitap">
+            <End Role="Kitap" EntitySet="Kitap" />
+            <End Role="Emanet" EntitySet="Emanet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emanet_Personel" Association="Self.FK_Emanet_Personel">
+            <End Role="Personel" EntitySet="Personel" />
+            <End Role="Emanet" EntitySet="Emanet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emanet_Uye" Association="Self.FK_Emanet_Uye">
+            <End Role="Uye" EntitySet="Uye" />
+            <End Role="Emanet" EntitySet="Emanet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kitap_Kategori" Association="Self.FK_Kitap_Kategori">
+            <End Role="Kategori" EntitySet="Kategori" />
+            <End Role="Kitap" EntitySet="Kitap" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kitap_Yazar" Association="Self.FK_Kitap_Yazar">
+            <End Role="Yazar" EntitySet="Yazar" />
+            <End Role="Kitap" EntitySet="Kitap" />
+          </AssociationSet>
+          <EntitySet Name="Iletisim" EntityType="KutuphaneModel.Iletisim" />
+        </EntityContainer>
+        <EntityType Name="Iletisim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdSoyad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Telefon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MesajKonusu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Mesaj" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KutuphaneModelStoreContainer" CdmEntityContainer="KutuphaneEntities1">
+          <EntitySetMapping Name="Ceza">
+            <EntityTypeMapping TypeName="KutuphaneModel.Ceza">
+              <MappingFragment StoreEntitySet="Ceza">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Uye" ColumnName="Uye" />
+                <ScalarProperty Name="Emanet" ColumnName="Emanet" />
+                <ScalarProperty Name="BaslamaTarihi" ColumnName="BaslamaTarihi" />
+                <ScalarProperty Name="BitisTarihi" ColumnName="BitisTarihi" />
+                <ScalarProperty Name="CezaUcreti" ColumnName="CezaUcreti" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Emanet">
+            <EntityTypeMapping TypeName="KutuphaneModel.Emanet">
+              <MappingFragment StoreEntitySet="Emanet">
+                <ScalarProperty Name="TeslimTarihi" ColumnName="TeslimTarihi" />
+                <ScalarProperty Name="IslemDurum" ColumnName="IslemDurum" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="KitapId" ColumnName="KitapId" />
+                <ScalarProperty Name="UyeId" ColumnName="UyeId" />
+                <ScalarProperty Name="PersonelId" ColumnName="PersonelId" />
+                <ScalarProperty Name="AlisTarihi" ColumnName="AlisTarihi" />
+                <ScalarProperty Name="IadeTarihi" ColumnName="IadeTarihi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kasa">
+            <EntityTypeMapping TypeName="KutuphaneModel.Kasa">
+              <MappingFragment StoreEntitySet="Kasa">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AyAdi" ColumnName="AyAdi" />
+                <ScalarProperty Name="Tutar" ColumnName="Tutar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategori">
+            <EntityTypeMapping TypeName="KutuphaneModel.Kategori">
+              <MappingFragment StoreEntitySet="Kategori">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Adi" ColumnName="Adi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kitap">
+            <EntityTypeMapping TypeName="KutuphaneModel.Kitap">
+              <MappingFragment StoreEntitySet="Kitap">
+                <ScalarProperty Name="Fotograf" ColumnName="Fotograf" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Adi" ColumnName="Adi" />
+                <ScalarProperty Name="KategoriId" ColumnName="KategoriId" />
+                <ScalarProperty Name="YazarId" ColumnName="YazarId" />
+                <ScalarProperty Name="BasimYili" ColumnName="BasimYili" />
+                <ScalarProperty Name="Yayinevi" ColumnName="Yayinevi" />
+                <ScalarProperty Name="SayfaSayisi" ColumnName="SayfaSayisi" />
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personel">
+            <EntityTypeMapping TypeName="KutuphaneModel.Personel">
+              <MappingFragment StoreEntitySet="Personel">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Adi" ColumnName="Adi" />
+                <ScalarProperty Name="Soyadi" ColumnName="Soyadi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="KutuphaneModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uye">
+            <EntityTypeMapping TypeName="KutuphaneModel.Uye">
+              <MappingFragment StoreEntitySet="Uye">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Adi" ColumnName="Adi" />
+                <ScalarProperty Name="Soyadi" ColumnName="Soyadi" />
+                <ScalarProperty Name="EMail" ColumnName="EMail" />
+                <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="Fotograf" ColumnName="Fotograf" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Yazar">
+            <EntityTypeMapping TypeName="KutuphaneModel.Yazar">
+              <MappingFragment StoreEntitySet="Yazar">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Adi" ColumnName="Adi" />
+                <ScalarProperty Name="Soyadi" ColumnName="Soyadi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Iletisim">
+            <EntityTypeMapping TypeName="KutuphaneModel.Iletisim">
+              <MappingFragment StoreEntitySet="Iletisim">
+                <ScalarProperty Name="Mesaj" ColumnName="Mesaj" />
+                <ScalarProperty Name="MesajKonusu" ColumnName="MesajKonusu" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

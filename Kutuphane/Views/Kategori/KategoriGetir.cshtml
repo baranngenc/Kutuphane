@@ -1,0 +1,25 @@
+﻿@model Kutuphane.Models.Entity.Kategori
+
+@{
+    ViewBag.Title = "KategoriGetir";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@using (Html.BeginForm("KategoriGetir", "Kategori", FormMethod.Post))
+{
+    <h2 style="color:1abc9c;">Kategori Güncelle</h2>
+    <div style=" margin-top:15px"></div>
+    <div class="form-group">
+        @Html.LabelFor(k => k.Id)
+        @Html.TextBoxFor(k => k.Id, new { @class = "form-control" })
+        <br /> <br />
+        @Html.LabelFor(k => k.Adi)
+        @Html.TextBoxFor(k => k.Adi, new { @class = "form-control" })
+
+    </div>
+    <div>
+        <button class="btn btn-primary" style="background-color:1abc9c; color:ffffff;border:0;"> Güncelle</button>
+    </div>
+
+
+}

@@ -1,0 +1,35 @@
+﻿@using Kutuphane.Models.Entity
+@model List<Yazar>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+
+<h1 style="color:1abc9c;">YAZARLAR</h1>
+<table class="table table-bordered">
+    <tr style="background-color:1abc9c; color:#ffffff">
+        <th>Id</th>
+        <th>Adı</th>
+        <th>Soyadı</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+    @foreach (var yazarlar in Model)
+    {
+        <tr>
+            <td>@yazarlar.Id</td>
+            <td>@yazarlar.Adi</td>
+            <td>@yazarlar.Soyadi</td>
+          <td>@Html.ActionLink("Sil", "YazarSil", new { id = yazarlar.Id },
+             new {@class="btn btn-danger", onclick="return confirm('Silmek İstiyor Musunuz')"})  </td>
+            
+            <td><a href="/Yazar/YazarGetir/@yazarlar.Id" class="btn btn-success">Güncelle</a>  </td>
+
+        </tr>
+    }
+</table>
+<div style="margin-top:15px" ></div>
+<div>
+    <a href="/Yazar/YazarEkle/" class="btn btn-primary" style="background-color:1abc9c; color:ffffff; border:0;" />Yeni Yazar Ekle </a>
+</div>

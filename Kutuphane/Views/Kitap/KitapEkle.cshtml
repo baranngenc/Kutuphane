@@ -1,0 +1,53 @@
+﻿@model Kutuphane.Models.Entity.Kitap
+@{
+    ViewBag.Title = "KitapEkle";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2 style=" color:1abc9c;">Kitap Ekle</h2>
+
+<form class="form-group" method="post">
+    <div style="margin-top:15px">
+        <label>Kitap Adı</label>
+        @Html.TextBoxFor(k => k.Adi, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Kategori</label>
+        @Html.DropDownListFor(k=>k.Kategori.Id,(IEnumerable<SelectListItem>)ViewBag.kategori,new {@class="form-control"})
+
+        @*@Html.DropDownList("KategoriId", (List<SelectListItem>)ViewBag.kategori,
+       new { @class = "form-control" })*@
+       @*@Html.DropDownList("KategoriId", (IEnumerable<SelectListItem>)ViewBag.kategori, new { @class = "form-control" })*@
+      
+       
+
+    </div>
+    <div style="margin-top:15px">
+        <label>Yazar Adı</label>
+        @*@Html.DropDownListFor(k => k.YazarId, (List<SelectListItem>)ViewBag.yzr,
+        new { @class = "form-control" })*@
+        @Html.DropDownListFor(k => k.Yazar.Id, (IEnumerable<SelectListItem>)ViewBag.yzr, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Yayınevi</label>
+        @Html.TextBoxFor(k => k.Yayinevi, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Basım Yılı</label>
+        @Html.TextBoxFor(k => k.BasimYili, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Sayfa Sayısı</label>
+        @Html.TextBoxFor(k => k.SayfaSayisi, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Durum</label>
+        @Html.TextBoxFor(k => k.Durum, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px">
+        <button class="btn btn-primary" id="btnKitapEkle" style="background-color:1abc9c; color:ffffff; border:0;" /> Ekle</button>
+    </div>
+    <input type="hidden" name="Durum" value="True" />
+</form>
+
+

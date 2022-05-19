@@ -1,0 +1,57 @@
+﻿@using Kutuphane.Models.Entity
+@model List<Kitap>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2 style="color:1abc9c">KİTAPLAR</h2>
+@using (Html.BeginForm("Index", "Kitap", FormMethod.Get))
+{
+    <div style="margin-top:15px; margin-bottom:15px;">
+        <label>Aranan Kitap : </label> @Html.TextBox("k")
+        <input type="submit" class="btn btn-info" value="Ara" />
+    </div>
+}
+<table class="table table-bordered">
+    <tr style="background-color:1abc9c;color:ffffff;">
+        <th>Id</th>
+        <th>Kitap Adı</th>
+        <th>Yazar</th>
+        <th>Kategorisi</th>
+        <th>Basım Yılı </th>
+        <th>Yayın Evi </th>
+        <th>Sayfa Sayısı</th>
+        <th> Durum</th>
+        <th> Sil</th>
+        <th> Güncelle</th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Adi  </td>
+            <td>@item.Yazar.Adi  @item.Yazar.Soyadi </td>
+            <td>@item.Kategori.Adi</td>
+            <td>@item.BasimYili</td>
+            <td>@item.Yayinevi</td>
+            <td>@item.SayfaSayisi</td>
+            <td>@item.Durum</td>
+            <td>
+                @Html.ActionLink("Sil", "KitapSil", new { id = item.Id },
+                     new { @class = "btn btn-danger", onclick = "return confirm('Silmek İstiyor Musunuz')" })
+            </td>
+            <td>
+                @Html.ActionLink("Güncelle", "KitapGetir", new { id = item.Id },
+                    new { @class = "btn btn-Success" })
+            </td>
+
+        </tr>
+
+    }
+
+</table>
+<div>
+    <a href="/Kitap/KitapEkle/" class="btn btn-primary" style="background-color:1abc9c; color:ffffff;border:0;" />Yeni Kitap Ekle </a>
+</div>

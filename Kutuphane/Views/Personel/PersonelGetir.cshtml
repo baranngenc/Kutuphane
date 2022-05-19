@@ -1,0 +1,27 @@
+﻿@model Kutuphane.Models.Entity.Personel
+@{
+    ViewBag.Title = "PersonelGetir";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2 style="color:1abc9c;">Personel Güncelle</h2>
+@using (Html.BeginForm("PersonelGetir", "Personel", FormMethod.Post))
+{ 
+    <div style="margin-top:15px"></div>
+<div>
+    <label>Personel Id</label>
+    @Html.TextBoxFor(p => p.Id, new { @class = "form-control" })
+</div>
+<div>
+    <label>Personel Adı</label>
+    @Html.TextBoxFor(p => p.Adi, new { @class = "form-control" })
+</div>
+<div>
+    <label>Personel soyadı</label>
+    @Html.TextBoxFor(p => p.Soyadi, new { @class = "form-control" })
+</div>
+<div></div>
+<div style="margin-top:15px">
+    <button class="btn btn-primary" style="background-color:1abc9c; color:ffffff; border:0;" > Personel Güncelle</button>
+</div>
+}

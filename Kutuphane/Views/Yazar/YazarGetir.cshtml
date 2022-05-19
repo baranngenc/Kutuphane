@@ -1,0 +1,27 @@
+﻿@model Kutuphane.Models.Entity.Yazar
+@{
+    ViewBag.Title = "YazarGetir";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h1 style="color:1abc9c" >YAZAR GÜNCELLE</h1>
+@using (Html.BeginForm("YazarGetir", "Yazar", FormMethod.Post))
+{
+    <div style="margin-top:15px"></div>
+    <div>
+        <label>Yazar Id</label>
+        @Html.TextBoxFor(y => y.Id, new { @class = "form-control" })
+    </div>
+    <div>
+        <label>Yazar Adı</label>
+        @Html.TextBoxFor(y => y.Adi, new { @class = "form-control" })
+    </div>
+    <div>
+        <label>Yazar soyadı</label>
+        @Html.TextBoxFor(y => y.Soyadi, new { @class = "form-control" })
+    </div>
+    <div></div>
+    <div style="margin-top:15px">
+        <button class="btn btn-primary" style="background-color:1abc9c; color:ffffff; border:0;" > Yazarı Güncelle</button>
+    </div>
+}

@@ -1,0 +1,39 @@
+﻿@model Kutuphane.Models.Entity.Emanet
+@{
+    ViewBag.Title = "EmanetVer";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2 style="color:1abc9c;">Emanet Ver</h2>
+<form class="form-group" method="post">
+    <div></div>
+    <div style="margin-top:15px;">
+        <label>Üye Id</label>
+        @Html.TextBoxFor(u => u.UyeId, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px;">
+        <label>Kitap Id</label>
+        @Html.TextBoxFor(u => u.KitapId, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px;">
+        <label>Personel Id </label>
+        @Html.TextBoxFor(u => u.PersonelId, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px;">
+        <label>Alış Tarihi </label>
+        <input type="text" class="form-control" name="AlisTarihi" value="@DateTime.Now.ToShortDateString()" />
+    </div>
+    <div style="margin-top:15px;">
+        <label>İade Tarihi </label>
+        <input type="text" class="form-control" name="IadeTarihi" value="@DateTime.Now.AddDays(15).ToShortDateString()" />
+    </div>
+    <div>
+        <input type="hidden" name="IslemDurum" value="false" />
+    </div>
+    <div style="margin-top:15px;"></div>
+    <div>
+         <button class="btn btn-primary" id="btnEmanetEkle" style="background-color:1abc9c; color:ffffff; border:0;" /> Ekle</button>
+    </div>
+
+</form>
+

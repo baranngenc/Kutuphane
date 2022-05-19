@@ -1,0 +1,55 @@
+﻿@using Kutuphane.Models.Entity
+@model List<Emanet>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2 style="color:1abc9c;"> KİTAP HAREKETLERİ</h2>
+@using (Html.BeginForm("Index", "Emanet", FormMethod.Get))
+{
+}
+<table class="table table-bordered">
+    <tr style="background-color:1abc9c; color:ffffff;">
+        <th> Hareket Id</th>
+        <th>Kitap Id</th>
+        <th>Kitap Adı</th>
+        <th>Üye Id</th>
+        <th>Üye Adı </th>
+        <th>Personel Id </th>
+        <th>Personel Adı</th>
+        <th> Alış Tarihi</th>
+        <th> İade Tarihi</th>
+        <th> Hareket Sil</th>
+        <th> Kitap İade</th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>@item.Id</td>
+    <td>@item.KitapId  </td>
+    <td>@item.Kitap.Adi </td>
+    <td>@item.UyeId</td>
+    <td>@item.Uye.Adi @item.Uye.Soyadi</td>
+    <td>@item.PersonelId</td>
+    <td>@item.Personel.Adi @item.Personel.Soyadi </td>
+    <td>@Convert.ToDateTime(@item.AlisTarihi).ToString("dd/MM/yyyy")</td>
+    <td>@Convert.ToDateTime(@item.IadeTarihi).ToString("dd/MM/yyyy")</td>
+    <td>
+        @Html.ActionLink("Sil", "EmanetSil", new { id = item.Id },
+             new { @class = "btn btn-danger", onclick = "return confirm('Silmek İstiyor Musunuz')" })
+    </td>
+    <td><a href="/Emanet/EmanetGetir/@item.Id" class="btn btn-success">Kitap İade </a>  </td>
+    
+
+</tr>
+
+    }
+
+</table>
+<div>
+    <a href="/Emanet/EmanetGetir/" class="btn btn-primary" style="background-color:1abc9c; color:ffffff;border:0;" />Emanet Al </a>
+</div>
+
+
