@@ -20,7 +20,10 @@ namespace Kutuphane.Models.Entity
         {
             this.Durum = true;
             this.Emanet = new HashSet<Emanet>();
+            this.Kategori = new Kategori();
+            this.Yazar= new Yazar();
         }
+  
     
         public int Id { get; set; }
         [Required(ErrorMessage = "Boþ Geçilemez!")]

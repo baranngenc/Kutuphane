@@ -18,12 +18,29 @@ namespace Kutuphane.Controllers
         public ActionResult Index(string k)
         {
             var Kitaplar = from ktp in db.Kitap select ktp;
-            if (!string.IsNullOrEmpty(k))
+
+            List<Kitap> list = new List<Kitap>();
+            Kitap kitap = new Kitap();  
+Kategori kategori = new Kategori();
+        
+
+
+
+            foreach (var item in Kitaplar)
             {
-                Kitaplar = Kitaplar.Where(x => x.Adi.Contains(k));
+                item.Yazar = db.Yazar.FirstOrDefault(x => x.Id == item.YazarId);
+                item.Kategori = db.Kategori.FirstOrDefault(x => x.Id == item.KategoriId);
+
+                kitap = item;   
+                list.Add(kitap);
             }
 
-            return View(Kitaplar.ToList());
+            if (!string.IsNullOrEmpty(k))
+            {
+                list = (List<Kitap>)list.Where(x => x.Adi.Contains(k));
+            }
+
+            return View(list.ToList());
         }
         [HttpGet]
         public ActionResult KitapEkle()
@@ -49,10 +66,11 @@ namespace Kutuphane.Controllers
         [HttpPost]
         public ActionResult KitapEkle(Kitap kitap)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                ViewBag.kategori = new SelectList(db.Kitap, "KategoriId");
-                ViewBag.yzr = new SelectList(db.Kitap, "YazarId");
+                KitapEkle();
+                //ViewBag.kategori = new SelectList(db.Kitap, "KategoriId");
+                //ViewBag.yzr = new SelectList(db.Kitap, "YazarId");
                 return View("KitapEkle");
             }
             var ktgri = db.Kategori.Where(k => k.Id ==kitap.Kategori.Id).FirstOrDefault();
@@ -60,6 +78,8 @@ namespace Kutuphane.Controllers
             kitap.Kategori = ktgri;
             kitap.Yazar = yazr;
             db.Kitap.Add(kitap);
+            db.Kategori.Add(ktgri);
+            db.Yazar.Add(yazr); 
             db.SaveChanges();
             return RedirectToAction("Index");
         }
