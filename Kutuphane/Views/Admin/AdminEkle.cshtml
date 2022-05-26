@@ -1,0 +1,31 @@
+﻿@model Kutuphane.Models.Entity.Admin
+@{
+    ViewBag.Title = "AdminEkle";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2 style="color:1abc9c;">Admin Ekle</h2>
+<form class="form-group" method="post">
+    <div></div>
+    <div style="margin-top:15px;">
+        <label>Admin Adı</label>
+        @Html.TextBoxFor(u => u.Adi, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px;">
+        <label>Admin Soyadı</label>
+        @Html.TextBoxFor(u => u.Soyadi, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px;">
+        <label>Admin Kullanıcı Adı</label>
+        @Html.TextBoxFor(u => u.KullaniciAdi, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px;">
+        <label>Admin Şifre</label>
+        @Html.TextBoxFor(u => u.Sifre, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px;"></div>
+    <div>
+        <button class="btn btn-primary" id="btnUyeEkle" style="background-color:1abc9c; color:ffffff;border:0;"> Ekle </button>
+    </div>
+</form>
+

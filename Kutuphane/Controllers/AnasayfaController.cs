@@ -13,18 +13,27 @@ namespace Kutuphane.Controllers
         // GET: Anasayfa
         KutuphaneEntities1 db = new KutuphaneEntities1();
         [HttpGet]
+        //[Authorize]
+        
         public ActionResult Index()
         {
-         AnasayfaListeleme anasayfaListeleme = new AnasayfaListeleme();
-           anasayfaListeleme.kitap=db.Kitap.ToList();
-            anasayfaListeleme.iletisim=db.Iletisim.ToList();
+            
+            var uyesayisi=db.Uye.Count();
+            ViewBag.us = uyesayisi;
+            var kitapsayisi=db.Kitap.Count();
+            ViewBag.ks = kitapsayisi;
+            var personelsayisi = db.Personel.Count();
+            ViewBag.ps = personelsayisi;
+            
+
+            AnasayfaListeleme anasayfaListeleme = new AnasayfaListeleme();
             return View(anasayfaListeleme);
         }
         [HttpPost]
-        public ActionResult Index(Iletisim i)
+        public ActionResult Index(Kitap kitap)
         {
-            db.Iletisim.Add(i);
-            db.SaveChanges();
+           
+            
             return RedirectToAction("Index");
         }
 

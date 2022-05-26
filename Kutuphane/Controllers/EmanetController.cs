@@ -29,10 +29,6 @@ namespace Kutuphane.Controllers
         [HttpPost]
         public ActionResult EmanetVer(Emanet emanet)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("EmanetVer");
-            }
 
             Db.Emanet.Add(emanet);
                 Db.SaveChanges();

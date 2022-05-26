@@ -11,20 +11,13 @@ namespace Kutuphane.Models.Entity
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
-    public partial class Iletisim
+    public partial class Admin
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
-        public string AdSoyad { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
-        public string Email { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
-        public string Telefon { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
-        public string MesajKonusu { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
-        public string Mesaj { get; set; }
+        public string KullaniciAdi { get; set; }
+        public string Sifre { get; set; }
+        public string Adi { get; set; }
+        public string Soyadi { get; set; }
     }
 }

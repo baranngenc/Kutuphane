@@ -1,0 +1,37 @@
+﻿@model Kutuphane.Models.Entity.Admin
+@{
+    ViewBag.Title = "AdminGetir";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2 style="color:1abc9c;">Admin Güncelle</h2>
+@using (Html.BeginForm("AdminGetir", "Admin", FormMethod.Post))
+{
+    <div style="margin-top:15px"></div>
+    <div>
+        <label>Üye Id</label>
+        @Html.TextBoxFor(u => u.Id, new { @class = "form-control" })
+    </div>
+    <div>
+        <label>Üye Adı</label>
+        @Html.TextBoxFor(u => u.Adi, new { @class = "form-control" })
+    </div>
+    <div>
+        <label>Üye Soyadı</label>
+        @Html.TextBoxFor(u => u.Soyadi, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px"></div>
+    <div>
+        <label>Üye Kullanıcı Adı</label>
+        @Html.TextBoxFor(u => u.KullaniciAdi, new { @class = "form-control" })
+    </div>
+    <div>
+        <label>Üye Şifre</label>
+        @Html.TextBoxFor(u => u.Sifre, new { @class = "form-control" })
+    </div>
+
+    <div></div>
+    <div style="margin-top:15px">
+        <button class="btn btn-primary" style="background-color:1abc9c;color:ffffff;border:0;"> Admin Güncelle</button>
+    </div>
+}

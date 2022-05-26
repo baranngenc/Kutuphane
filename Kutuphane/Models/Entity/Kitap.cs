@@ -11,7 +11,6 @@ namespace Kutuphane.Models.Entity
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Kitap
     {
@@ -20,28 +19,16 @@ namespace Kutuphane.Models.Entity
         {
             this.Durum = true;
             this.Emanet = new HashSet<Emanet>();
-            this.Kategori = new Kategori();
-            this.Yazar= new Yazar();
         }
-  
     
         public int Id { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
         public string Adi { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
         public int KategoriId { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
         public int YazarId { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
         public string BasimYili { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
         public string Yayinevi { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
         public string SayfaSayisi { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
         public bool Durum { get; set; }
-
-        public string Fotograf { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Emanet> Emanet { get; set; }

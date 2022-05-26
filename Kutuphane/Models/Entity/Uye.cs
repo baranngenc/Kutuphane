@@ -11,8 +11,7 @@ namespace Kutuphane.Models.Entity
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Uye
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,19 +22,11 @@ namespace Kutuphane.Models.Entity
         }
     
         public int Id { get; set; }
-        [Required(ErrorMessage ="Boþ Geçilemez!")]
         public string Adi { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
         public string Soyadi { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
         public string EMail { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
         public string KullaniciAdi { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
         public string Sifre { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
-        public string Fotograf { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
         public string Telefon { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

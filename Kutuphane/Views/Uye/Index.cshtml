@@ -17,7 +17,6 @@
         <th>Kullanıcı Adı</th>
         <th>Sifre</th>
         <th>Telefon</th>
-        <th>Fotograf</th>
         <th>Sil</th>
         <th>Güncelle</th>
     </tr>
@@ -31,7 +30,6 @@
             <td>@uye.KullaniciAdi</td>
             <td>@uye.Sifre</td>
             <td>@uye.Telefon</td>
-            <td>@uye.Fotograf</td>
             <td>
                 @Html.ActionLink("Sil", "UyeSil", new { id = uye.Id },
            new { @class = "btn btn-danger", onclick = "return confirm('Silmek İstiyor Musunuz')" })

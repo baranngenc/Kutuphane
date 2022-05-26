@@ -26,10 +26,7 @@ namespace Kutuphane.Controllers
         [HttpPost]
         public ActionResult PersonelEkle(Personel personel)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("PersonelEkle");
-            }
+            
             db.Personel.Add(personel);
             db.SaveChanges();
             return RedirectToAction("Index");

@@ -11,7 +11,6 @@ namespace Kutuphane.Models.Entity
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Emanet
     {
@@ -22,15 +21,10 @@ namespace Kutuphane.Models.Entity
         }
     
         public int Id { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
         public int KitapId { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
         public int UyeId { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
         public int PersonelId { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
         public System.DateTime AlisTarihi { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
         public System.DateTime IadeTarihi { get; set; }
         public Nullable<bool> IslemDurum { get; set; }
         public Nullable<System.DateTime> TeslimTarihi { get; set; }

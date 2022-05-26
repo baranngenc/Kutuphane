@@ -13,19 +13,19 @@
     </div>
     <div style="margin-top:15px">
         <label>Kategori</label>
-        @Html.DropDownListFor(k=>k.Kategori.Id,(IEnumerable<SelectListItem>)ViewBag.kategori,new {@class="form-control"})
+        @Html.DropDownListFor(k => k.Kategori.Id, (IEnumerable<SelectListItem>)ViewBag.kategori, new { @class = "form-control" })
 
         @*@Html.DropDownList("KategoriId", (List<SelectListItem>)ViewBag.kategori,
-       new { @class = "form-control" })*@
-       @*@Html.DropDownList("KategoriId", (IEnumerable<SelectListItem>)ViewBag.kategori, new { @class = "form-control" })*@
-      
-       
+            new { @class = "form-control" })*@
+        @*@Html.DropDownList("KategoriId", (IEnumerable<SelectListItem>)ViewBag.kategori, new { @class = "form-control" })*@
+
+
 
     </div>
     <div style="margin-top:15px">
         <label>Yazar Adı</label>
         @*@Html.DropDownListFor(k => k.YazarId, (List<SelectListItem>)ViewBag.yzr,
-        new { @class = "form-control" })*@
+            new { @class = "form-control" })*@
         @Html.DropDownListFor(k => k.Yazar.Id, (IEnumerable<SelectListItem>)ViewBag.yzr, new { @class = "form-control" })
     </div>
     <div style="margin-top:15px">

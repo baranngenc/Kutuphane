@@ -27,10 +27,7 @@ namespace Kutuphane.Controllers
         [HttpPost]
         public ActionResult KategoriEkle(Kategori kategori)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("KategoriEkle");
-            }
+            
             KutuphaneEntities.Kategori.Add(kategori);
             KutuphaneEntities.SaveChanges();
             return RedirectToAction("Index");

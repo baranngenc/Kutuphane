@@ -11,20 +11,14 @@ namespace Kutuphane.Models.Entity
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Ceza
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
         public int Uye { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
         public int Emanet { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
         public System.DateTime BaslamaTarihi { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
         public System.DateTime BitisTarihi { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
         public decimal CezaUcreti { get; set; }
     
         public virtual Emanet Emanet1 { get; set; }

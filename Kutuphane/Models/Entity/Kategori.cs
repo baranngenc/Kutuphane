@@ -11,7 +11,6 @@ namespace Kutuphane.Models.Entity
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Kategori
     {
@@ -22,7 +21,6 @@ namespace Kutuphane.Models.Entity
         }
     
         public int Id { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
         public string Adi { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

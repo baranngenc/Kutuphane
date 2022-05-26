@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="KutuphaneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciAdi" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Sifre" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Adi" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Soyadi" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="Ceza">
           <Key>
             <PropertyRef Name="Id" />
@@ -29,25 +39,6 @@
           <Property Name="IslemDurum" Type="bit" />
           <Property Name="TeslimTarihi" Type="datetime" />
         </EntityType>
-        <EntityType Name="Iletisim">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="AdSoyad" Type="nvarchar(max)" />
-          <Property Name="Email" Type="nvarchar(max)" />
-          <Property Name="Telefon" Type="nvarchar(max)" />
-          <Property Name="MesajKonusu" Type="nvarchar(max)" />
-          <Property Name="Mesaj" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="Kasa">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="AyAdi" Type="nvarchar" MaxLength="15" Nullable="false" />
-          <Property Name="Tutar" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
         <EntityType Name="Kategori">
           <Key>
             <PropertyRef Name="Id" />
@@ -67,7 +58,6 @@
           <Property Name="Yayinevi" Type="nvarchar(max)" Nullable="false" />
           <Property Name="SayfaSayisi" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Durum" Type="bit" Nullable="false" />
-          <Property Name="Fotograf" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Personel">
           <Key>
@@ -97,7 +87,6 @@
           <Property Name="EMail" Type="nvarchar(max)" Nullable="false" />
           <Property Name="KullaniciAdi" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Sifre" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Fotograf" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Telefon" Type="nvarchar" MaxLength="11" Nullable="false" />
         </EntityType>
         <EntityType Name="Yazar">
@@ -192,11 +181,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ToplamCeza" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="KutuphaneModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ceza" EntityType="Self.Ceza" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Emanet" EntityType="Self.Emanet" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Iletisim" EntityType="Self.Iletisim" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Kasa" EntityType="Self.Kasa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Kitap" EntityType="Self.Kitap" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Personel" EntityType="Self.Personel" Schema="dbo" store:Type="Tables" />
@@ -247,7 +267,7 @@
           <Property Name="BitisTarihi" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CezaUcreti" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <NavigationProperty Name="Emanet1" Relationship="Self.FK_Ceza_Emanet" FromRole="Ceza" ToRole="Emanet" />
-          <NavigationProperty Name="Uye1" Relationship="Self.FK_Ceza_Uye" FromRole="Ceza" ToRole="Uye" />
+          <NavigationProperty Name="Uye1" Relationship="KutuphaneModel.FK_Ceza_Uye" FromRole="Ceza" ToRole="Uye" />
         </EntityType>
         <EntityType Name="Emanet">
           <Key>
@@ -262,17 +282,9 @@
           <NavigationProperty Name="Ceza" Relationship="Self.FK_Ceza_Emanet" FromRole="Emanet" ToRole="Ceza" />
           <NavigationProperty Name="Kitap" Relationship="Self.FK_Emanet_Kitap" FromRole="Emanet" ToRole="Kitap" />
           <NavigationProperty Name="Personel" Relationship="Self.FK_Emanet_Personel" FromRole="Emanet" ToRole="Personel" />
-          <NavigationProperty Name="Uye" Relationship="Self.FK_Emanet_Uye" FromRole="Emanet" ToRole="Uye" />
           <Property Name="IslemDurum" Type="Boolean" />
           <Property Name="TeslimTarihi" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="Kasa">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AyAdi" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Tutar" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Uye" Relationship="KutuphaneModel.FK_Emanet_Uye" FromRole="Emanet" ToRole="Uye" />
         </EntityType>
         <EntityType Name="Kategori">
           <Key>
@@ -297,7 +309,6 @@
           <NavigationProperty Name="Emanet" Relationship="Self.FK_Emanet_Kitap" FromRole="Kitap" ToRole="Emanet" />
           <NavigationProperty Name="Kategori" Relationship="Self.FK_Kitap_Kategori" FromRole="Kitap" ToRole="Kategori" />
           <NavigationProperty Name="Yazar" Relationship="Self.FK_Kitap_Yazar" FromRole="Kitap" ToRole="Yazar" />
-          <Property Name="Fotograf" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Personel">
           <Key>
@@ -318,21 +329,6 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <EntityType Name="Uye">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Adi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Soyadi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="EMail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="KullaniciAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Sifre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Fotograf" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Telefon" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Ceza" Relationship="Self.FK_Ceza_Uye" FromRole="Uye" ToRole="Ceza" />
-          <NavigationProperty Name="Emanet" Relationship="Self.FK_Emanet_Uye" FromRole="Uye" ToRole="Emanet" />
-        </EntityType>
         <EntityType Name="Yazar">
           <Key>
             <PropertyRef Name="Id" />
@@ -351,18 +347,6 @@
             </Principal>
             <Dependent Role="Ceza">
               <PropertyRef Name="Emanet" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Ceza_Uye">
-          <End Role="Uye" Type="Self.Uye" Multiplicity="1" />
-          <End Role="Ceza" Type="Self.Ceza" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Uye">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Ceza">
-              <PropertyRef Name="Uye" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -387,18 +371,6 @@
             </Principal>
             <Dependent Role="Emanet">
               <PropertyRef Name="PersonelId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Emanet_Uye">
-          <End Role="Uye" Type="Self.Uye" Multiplicity="1" />
-          <End Role="Emanet" Type="Self.Emanet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Uye">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Emanet">
-              <PropertyRef Name="UyeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -429,19 +401,13 @@
         <EntityContainer Name="KutuphaneEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Ceza" EntityType="Self.Ceza" />
           <EntitySet Name="Emanet" EntityType="Self.Emanet" />
-          <EntitySet Name="Kasa" EntityType="Self.Kasa" />
           <EntitySet Name="Kategori" EntityType="Self.Kategori" />
           <EntitySet Name="Kitap" EntityType="Self.Kitap" />
           <EntitySet Name="Personel" EntityType="Self.Personel" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="Uye" EntityType="Self.Uye" />
           <EntitySet Name="Yazar" EntityType="Self.Yazar" />
           <AssociationSet Name="FK_Ceza_Emanet" Association="Self.FK_Ceza_Emanet">
             <End Role="Emanet" EntitySet="Emanet" />
-            <End Role="Ceza" EntitySet="Ceza" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Ceza_Uye" Association="Self.FK_Ceza_Uye">
-            <End Role="Uye" EntitySet="Uye" />
             <End Role="Ceza" EntitySet="Ceza" />
           </AssociationSet>
           <AssociationSet Name="FK_Emanet_Kitap" Association="Self.FK_Emanet_Kitap">
@@ -452,10 +418,6 @@
             <End Role="Personel" EntitySet="Personel" />
             <End Role="Emanet" EntitySet="Emanet" />
           </AssociationSet>
-          <AssociationSet Name="FK_Emanet_Uye" Association="Self.FK_Emanet_Uye">
-            <End Role="Uye" EntitySet="Uye" />
-            <End Role="Emanet" EntitySet="Emanet" />
-          </AssociationSet>
           <AssociationSet Name="FK_Kitap_Kategori" Association="Self.FK_Kitap_Kategori">
             <End Role="Kategori" EntitySet="Kategori" />
             <End Role="Kitap" EntitySet="Kitap" />
@@ -464,20 +426,108 @@
             <End Role="Yazar" EntitySet="Yazar" />
             <End Role="Kitap" EntitySet="Kitap" />
           </AssociationSet>
-          <EntitySet Name="Iletisim" EntityType="KutuphaneModel.Iletisim" />
-        </EntityContainer>
-        <EntityType Name="Iletisim">
+          <EntitySet Name="Admin" EntityType="KutuphaneModel.Admin" />
+          <EntitySet Name="Uye" EntityType="KutuphaneModel.Uye" />
+          <AssociationSet Name="FK_Ceza_Uye" Association="KutuphaneModel.FK_Ceza_Uye">
+            <End Role="Uye" EntitySet="Uye" />
+            <End Role="Ceza" EntitySet="Ceza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emanet_Uye" Association="KutuphaneModel.FK_Emanet_Uye">
+            <End Role="Uye" EntitySet="Uye" />
+            <End Role="Emanet" EntitySet="Emanet" />
+          </AssociationSet>
+          <FunctionImport Name="ToplamCeza" ReturnType="Collection(Decimal)" />
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(KutuphaneModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(KutuphaneModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          </EntityContainer>
+        <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AdSoyad" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Telefon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="MesajKonusu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Mesaj" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KullaniciAdi" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Sifre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Adi" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Soyadi" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-      </Schema>
+        <EntityType Name="Uye">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Adi" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Soyadi" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EMail" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KullaniciAdi" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Sifre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Telefon" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Ceza" Relationship="KutuphaneModel.FK_Ceza_Uye" FromRole="Uye" ToRole="Ceza" />
+          <NavigationProperty Name="Emanet" Relationship="KutuphaneModel.FK_Emanet_Uye" FromRole="Uye" ToRole="Emanet" />
+        </EntityType>
+        <Association Name="FK_Ceza_Uye">
+          <End Type="KutuphaneModel.Uye" Role="Uye" Multiplicity="1" />
+          <End Type="KutuphaneModel.Ceza" Role="Ceza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uye">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ceza">
+              <PropertyRef Name="Uye" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emanet_Uye">
+          <End Type="KutuphaneModel.Uye" Role="Uye" Multiplicity="1" />
+          <End Type="KutuphaneModel.Emanet" Role="Emanet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uye">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Emanet">
+              <PropertyRef Name="UyeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -509,15 +559,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Kasa">
-            <EntityTypeMapping TypeName="KutuphaneModel.Kasa">
-              <MappingFragment StoreEntitySet="Kasa">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="AyAdi" ColumnName="AyAdi" />
-                <ScalarProperty Name="Tutar" ColumnName="Tutar" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Kategori">
             <EntityTypeMapping TypeName="KutuphaneModel.Kategori">
               <MappingFragment StoreEntitySet="Kategori">
@@ -529,7 +570,6 @@
           <EntitySetMapping Name="Kitap">
             <EntityTypeMapping TypeName="KutuphaneModel.Kitap">
               <MappingFragment StoreEntitySet="Kitap">
-                <ScalarProperty Name="Fotograf" ColumnName="Fotograf" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Adi" ColumnName="Adi" />
                 <ScalarProperty Name="KategoriId" ColumnName="KategoriId" />
@@ -561,20 +601,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Uye">
-            <EntityTypeMapping TypeName="KutuphaneModel.Uye">
-              <MappingFragment StoreEntitySet="Uye">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Adi" ColumnName="Adi" />
-                <ScalarProperty Name="Soyadi" ColumnName="Soyadi" />
-                <ScalarProperty Name="EMail" ColumnName="EMail" />
-                <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
-                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
-                <ScalarProperty Name="Fotograf" ColumnName="Fotograf" />
-                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Yazar">
             <EntityTypeMapping TypeName="KutuphaneModel.Yazar">
               <MappingFragment StoreEntitySet="Yazar">
@@ -584,18 +610,55 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Iletisim">
-            <EntityTypeMapping TypeName="KutuphaneModel.Iletisim">
-              <MappingFragment StoreEntitySet="Iletisim">
-                <ScalarProperty Name="Mesaj" ColumnName="Mesaj" />
-                <ScalarProperty Name="MesajKonusu" ColumnName="MesajKonusu" />
-                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+          <EntitySetMapping Name="Admin">
+            <EntityTypeMapping TypeName="KutuphaneModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="Soyadi" ColumnName="Soyadi" />
+                <ScalarProperty Name="Adi" ColumnName="Adi" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Uye">
+            <EntityTypeMapping TypeName="KutuphaneModel.Uye">
+              <MappingFragment StoreEntitySet="Uye">
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+                <ScalarProperty Name="EMail" ColumnName="EMail" />
+                <ScalarProperty Name="Soyadi" ColumnName="Soyadi" />
+                <ScalarProperty Name="Adi" ColumnName="Adi" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ToplamCeza" FunctionName="KutuphaneModel.Store.ToplamCeza" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="KutuphaneModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="KutuphaneModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="KutuphaneModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="KutuphaneModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KutuphaneModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="KutuphaneModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KutuphaneModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="KutuphaneModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="KutuphaneModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

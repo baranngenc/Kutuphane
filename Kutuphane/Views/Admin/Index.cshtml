@@ -1,0 +1,35 @@
+﻿@using Kutuphane.Models.Entity
+@model List<Admin>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2 style="color:1abc9c;">ADMİNLER</h2>
+<table class=" table table-bordered">
+    <tr style="background-color:1abc9c; color:ffffff;">
+        <th>Id</th>
+        <th>Adı</th>
+        <th>Soyadı</th>
+        <th>Kullanıcı Adı</th>
+        <th>Şİfresi</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+    @foreach (var Adminler in Model)
+    {
+        <tr>
+            <td>@Adminler.Id</td>
+            <td>@Adminler.Adi</td>
+            <td>@Adminler.Soyadi</td>
+            <td>@Adminler.KullaniciAdi</td>
+            <td>***Güvelik Nedeniyle Eklenmedi***</td>
+            <td><a href="/Admin/AdminSil/@Adminler.Id" class="btn btn-danger">Sil</a></td>
+            <td><a href="/Admin/AdminGetir/@Adminler.Id" class="btn btn-success">Güncelle</a>  </td>
+
+        </tr>
+    }
+
+</table>
+
+<a href="/Admin/AdminEkle/" class="btn btn-primary" style="background-color:1abc9c; color:ffffff; border:0;">Yeni Admin Ekle  </a>

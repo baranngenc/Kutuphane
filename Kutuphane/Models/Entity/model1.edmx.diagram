@@ -7,22 +7,21 @@
       <Diagram DiagramId="b04267a251ff4f6e8683790db12b8b3f" Name="Diagram1" ZoomLevel="93">
         <EntityTypeShape EntityType="KutuphaneModel.Ceza" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="KutuphaneModel.Emanet" Width="1.5" PointX="6" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="KutuphaneModel.Kasa" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="KutuphaneModel.Kategori" Width="1.5" PointX="1.5" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="KutuphaneModel.Kitap" Width="1.5" PointX="3.75" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="KutuphaneModel.Personel" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="KutuphaneModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="KutuphaneModel.Uye" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="KutuphaneModel.Yazar" Width="1.5" PointX="1.5" PointY="10.25" IsExpanded="true" />
         <AssociationConnector Association="KutuphaneModel.FK_Ceza_Emanet" ManuallyRouted="false" />
-        <AssociationConnector Association="KutuphaneModel.FK_Ceza_Uye" ManuallyRouted="false" />
         <AssociationConnector Association="KutuphaneModel.FK_Emanet_Kitap" ManuallyRouted="false" />
         <AssociationConnector Association="KutuphaneModel.FK_Emanet_Personel" ManuallyRouted="false" />
-        <AssociationConnector Association="KutuphaneModel.FK_Emanet_Uye" ManuallyRouted="false" />
         <AssociationConnector Association="KutuphaneModel.FK_Kitap_Kategori" ManuallyRouted="false" />
         <AssociationConnector Association="KutuphaneModel.FK_Kitap_Yazar" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="KutuphaneModel.Iletisim" Width="1.5" PointX="0.75" PointY="0.75" />
-      </Diagram>
+        <EntityTypeShape EntityType="KutuphaneModel.Admin" Width="1.5" PointX="6.375" PointY="0.75" />
+        <EntityTypeShape EntityType="KutuphaneModel.Uye" Width="1.5" PointX="0.75" PointY="4" />
+        <AssociationConnector Association="KutuphaneModel.FK_Ceza_Uye" />
+        <AssociationConnector Association="KutuphaneModel.FK_Emanet_Uye" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

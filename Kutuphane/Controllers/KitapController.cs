@@ -7,8 +7,10 @@ using System.Data.Entity;
 using System.Data.Sql;
 using Kutuphane.Models.Entity;
 using System.Data.SqlClient;
-using Kutuphane.Models;
-using System.Data.Entity;
+using Kutuphane.Models.classes;
+using System.IO;
+using Microsoft.AspNetCore.Http;
+
 namespace Kutuphane.Controllers
 {
     public class KitapController : Controller
@@ -64,22 +66,24 @@ Kategori kategori = new Kategori();
             return View();
         }
         [HttpPost]
-        public ActionResult KitapEkle(Kitap kitap)
+        public ActionResult KitapEkle(Kitap k)
         {
-            if (ModelState.IsValid)
-            {
-                KitapEkle();
-                //ViewBag.kategori = new SelectList(db.Kitap, "KategoriId");
-                //ViewBag.yzr = new SelectList(db.Kitap, "YazarId");
-                return View("KitapEkle");
-            }
-            var ktgri = db.Kategori.Where(k => k.Id ==kitap.Kategori.Id).FirstOrDefault();
-            var yazr = db.Yazar.Where(y => y.Id == kitap.Yazar.Id).FirstOrDefault();
-            kitap.Kategori = ktgri;
-            kitap.Yazar = yazr;
-            db.Kitap.Add(kitap);
-            db.Kategori.Add(ktgri);
-            db.Yazar.Add(yazr); 
+           
+            //if (ModelState.IsValid)
+            //{
+            //    KitapEkle();
+            //    //ViewBag.kategori = new SelectList(db.Kitap, "KategoriId");
+            //    //ViewBag.yzr = new SelectList(db.Kitap, "YazarId");
+            //    return View("KitapEkle");
+            //}
+         
+            var ktgri = db.Kategori.Where(a => a.Id ==k.Kategori.Id).FirstOrDefault();
+            var yazr = db.Yazar.Where(y => y.Id == k.Yazar.Id).FirstOrDefault();
+            k.Kategori=ktgri;
+            k.Yazar=yazr;
+            db.Kitap.Add(k);
+            //db.Kategori.Add(ktgri);
+            //db.Yazar.Add(yazr); 
             db.SaveChanges();
             return RedirectToAction("Index");
         }

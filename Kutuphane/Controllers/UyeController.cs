@@ -25,10 +25,7 @@ namespace Kutuphane.Controllers
         [HttpPost]
         public ActionResult UyeEkle(Uye uye)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("UyeEkle");
-            }
+           
             db.Uye.Add(uye);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -57,7 +54,6 @@ namespace Kutuphane.Controllers
             u.EMail=uye.EMail;
             u.Telefon=uye.Telefon;
             u.Sifre=uye.Sifre;
-            u.Fotograf=uye.Fotograf;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

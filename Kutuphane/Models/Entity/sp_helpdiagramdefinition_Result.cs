@@ -10,14 +10,10 @@
 namespace Kutuphane.Models.Entity
 {
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    public partial class Kasa
+    
+    public partial class sp_helpdiagramdefinition_Result
     {
-        public int Id { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
-        public string AyAdi { get; set; }
-        [Required(ErrorMessage = "Boþ Geçilemez!")]
-        public string Tutar { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }
