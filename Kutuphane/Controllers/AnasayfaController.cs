@@ -13,7 +13,7 @@ namespace Kutuphane.Controllers
         // GET: Anasayfa
         KutuphaneEntities1 db = new KutuphaneEntities1();
         [HttpGet]
-        //[Authorize]
+        [Authorize]
         
         public ActionResult Index()
         {
